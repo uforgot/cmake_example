@@ -10,6 +10,19 @@ set(WINDOW_HEIGHT 540)
 project(${PROJECT_NAME})
 add_executable(${PROJECT_NAME} src/main.cpp)
 
+# MAC OS 일 경우 프레임워크 링크 추가
+if(APPLE)
+  target_link_libraries(${PROJECT_NAME} PRIVATE
+  "-framework Foundation"
+  "-framework IOKit"
+  "-framework CoreVideo" 
+  "-framework OpenGL" 
+  "-framework IOKit" 
+  "-framework Cocoa" 
+  "-framework Carbon"
+  )
+endif()
+
 include(Dependency.cmake)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${DEP_INCLUDE_DIR})
